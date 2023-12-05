@@ -7,10 +7,10 @@ use App\Models\Alternatif;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class DecisionMatriks extends Model
+class DecisionMatrix extends Model
 {
     use HasFactory;
-    protected $table = 'decision_matrix';
+    protected $table = 'table_decision_matrix';
     protected $fillable = ['id_kriteria', 'id_alternatif', 'value'];
 
     public function alternatif()

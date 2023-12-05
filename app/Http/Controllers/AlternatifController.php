@@ -12,8 +12,8 @@ class AlternatifController extends Controller
      */
     public function index()
     {
-        $alternatif = Alternatif::orderBy('id', 'desc')->paginate(5);
-        return view('#', compact('alternatif'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $alternatif = Alternatif::orderBy('id', 'asc')->paginate(5);
+        return view('alternatif.indexAlternatif', compact('alternatif'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -21,7 +21,7 @@ class AlternatifController extends Controller
      */
     public function create()
     {
-        return view('#');
+        return view('alternatif.createAlternatif');
     }
 
     /**
@@ -30,17 +30,11 @@ class AlternatifController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id' => 'required',
             'nama_alternatif' => 'required',
             ]);
-            // Guru::create($request->all());
-            $alternatif = new Alternatif();
-            $alternatif->id = $request->get('id');
-            $alternatif->nama_alternatif = $request->get('nama_alternatif');
+            Alternatif::create($request->all());
 
-            $alternatif->save();
-            return redirect()->route('#') 
-            -> with('success', 'Data Alternatif Berhasil Ditambahkan');
+            return redirect()->route('data-alternatif.index')->with('success', 'Alternatif Berhasil Ditambahkan');
     }
 
     /**
@@ -57,7 +51,7 @@ class AlternatifController extends Controller
     public function edit($id)
     {
         $alternatif = Alternatif::find($id);
-        return view('#', compact('Alternatif'));
+        return view('alternatif.editAlternatif', compact('alternatif'));
     }
 
     /**
@@ -66,16 +60,14 @@ class AlternatifController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'id' => 'required',
             'nama_alternatif' => 'required',
             ]);
             
             $alternatif = Alternatif::where('id', $id)->first();
-            $alternatif->id = $request->get('id');
             $alternatif->nama_alternatif = $request->get('nama_alternatif');
 
             $alternatif->save();
-            return redirect()->route('#') 
+            return redirect()->route('data-alternatif.index') 
             -> with('success', 'Data Alternatif Berhasil Diupdate');
     }
 
@@ -85,6 +77,6 @@ class AlternatifController extends Controller
     public function destroy($id)
     {
         Alternatif::find($id)->delete();
-        return redirect()->route('#') -> with('success', 'Data Alternatif Berhasil Dihapus');
+        return redirect()->route('data-alternatif.index') -> with('success', 'Data Alternatif Berhasil Dihapus');
     }
 }

@@ -21,4 +21,10 @@ class Alternatif extends Model
         return $this->hasMany(DecisionMatrix::class, 'id_alternatif', 'id');
     }
 
+    public function isUsed()
+    {
+        // Pemeriksaan apakah id_alternatif telah digunakan di tabel decision_matrix
+        return DecisionMatrix::where('id_alternatif', $this->id)->exists();
+    }
+
 }

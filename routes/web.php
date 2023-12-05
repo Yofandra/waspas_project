@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AlternatifController;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\DecisionMatrixController;
+use App\Http\Controllers\NormalisasiController;
+use App\Http\Controllers\ResultController;
+use App\Models\Alternatif;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('master');
 });
+
+Route::resource('/data-kriteria', KriteriaController::class);
+Route::resource('/data-alternatif', AlternatifController::class);
+Route::resource('/decision-matrix', DecisionMatrixController::class);
+Route::get('/normalisasi', [NormalisasiController::class, 'index'])->name('normalisasi.index');
+Route::get('/score', [ResultController::class, 'index'])->name('score.index');

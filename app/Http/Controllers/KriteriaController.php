@@ -12,8 +12,8 @@ class KriteriaController extends Controller
      */
     public function index()
     {
-        $kriteria = Kriteria::orderBy('id', 'desc')->paginate(5);
-        return view('#', compact('kriteria'))->with('i', (request()->input('page', 1) - 1) * 5);
+        $kriteria = Kriteria::orderBy('id', 'asc')->paginate(5);
+        return view('kriteria.indexKriteria', compact('kriteria'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -21,7 +21,7 @@ class KriteriaController extends Controller
      */
     public function create()
     {
-        return view('#');
+        return view('kriteria.createKriteria');
     }
 
     /**
@@ -30,20 +30,13 @@ class KriteriaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'id' => 'required',
             'nama_kriteria' => 'required',
             'bobot_kriteria' => 'required',
-            'jenis_kriteria' => 'required',
+            'jenis_kriteria' => 'required|in:cost,benefit',
             ]);
-            $kriteria = new Kriteria();
-            $kriteria->id = $request->get('id');
-            $kriteria->nama_kriteria = $request->get('nama_kriteria');
-            $kriteria->bobot_kriteria = $request->get('bobot_kriteria');
-            $kriteria->jenis_kriteria = $request->get('jenis_kriteria');
+            Kriteria::create($request->all());
 
-            $kriteria->save();
-            return redirect()->route('#') 
-            -> with('success', 'Data Kriteria Berhasil Ditambahkan');
+            return redirect()->route('data-kriteria.index')->with('success', 'Kriteria Berhasil Ditambahkan');
     }
 
     /**
@@ -60,7 +53,7 @@ class KriteriaController extends Controller
     public function edit($id)
     {
         $kriteria = Kriteria::find($id);
-        return view('#', compact('Kriteria'));
+        return view('kriteria.editKriteria', compact('kriteria'));
     }
 
     /**
@@ -69,19 +62,17 @@ class KriteriaController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'id' => 'required',
             'nama_kriteria' => 'required',
             'bobot_kriteria' => 'required',
-            'jenis_kriteria' => 'required',
+            'jenis_kriteria' => 'required|in:cost,benefit',
             ]);
             $kriteria = Kriteria::where('id', $id)->first();
-            $kriteria->id = $request->get('id');
             $kriteria->nama_kriteria = $request->get('nama_kriteria');
             $kriteria->bobot_kriteria = $request->get('bobot_kriteria');
             $kriteria->jenis_kriteria = $request->get('jenis_kriteria');
 
             $kriteria->save();
-            return redirect()->route('#') 
+            return redirect()->route('data-kriteria.index') 
             -> with('success', 'Data Kriteria Berhasil Ditambahkan');
     }
 
@@ -91,6 +82,6 @@ class KriteriaController extends Controller
     public function destroy($id)
     {
         Kriteria::find($id)->delete();
-        return redirect()->route('#') -> with('success', 'Data Kriteria Berhasil Dihapus');
+        return redirect()->route('data-kriteria.index') -> with('success', 'Data Kriteria Berhasil Dihapus');
     }
 }

@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
     "./resources/**/*.blade.php",
     "./resources/**/*.js",
@@ -9,9 +9,8 @@ export default {
   theme: {
     extend: {
       colors: {
-        'putih-purple': '#726274', 
-        'abang': '#5D5C5C',
-      },
+        'purple-main': '#726274',
+      }
     },
   },
   plugins: [
