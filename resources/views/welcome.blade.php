@@ -59,10 +59,29 @@
         </div>
         </nav>
 
-        <div class="w-screen h-screen">
-                <img src="{{ asset('docs/bg.jpg') }}" class="h-8 w-screen h-screen" alt="Flowbite Logo"  />
-                <a></a>
+        <div class="relative w-screen h-screen">
+                <img src="{{ asset('docs/bg.jpg') }}" class="object-cover w-full h-full" alt="Background Image"  />
+
+                <div class="absolute inset-0 bg-cover bg-center bg-blend-overlay mix-blend-multiply" style="background-image: url('{{ asset('docs/bg2.png') }}');">
+                </div>
+
+                <div class="absolute inset-0 flex flex-col items-center justify-center text-white text-center">
+                    <div class="text-4xl font-bold">
+                        Buat Keputusanmu
+                    </div>
+                        <div class="text-4xl font-bold">
+                            Menggunakan Metode WASPAS
+                        </div>
+                            <div class="text-2xl mt-8">
+                                Weight Aggregated Sum Product Assesment (WASPAS) merupakan salah satu metode yang digunakan untuk menimalisir kecacatan dari suatu hasil dalam pencarian hasil untuk mengetahui nilai tertinggi dan terkecil.
+                            </div>
+
+                            <div class="mt-10">
+                                <a href="#" class="px-6 py-3 bg-purple-500 text-white rounded-md hover:bg-blue-600 transition-all duration-300">Masuk</a>
+                            </div>
+                </div>
+
+
         </div>
- 
     </body>
 </html>
