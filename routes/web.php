@@ -20,7 +20,7 @@ use App\Models\Alternatif;
 */
 
 Route::get('/', function () {
-    return view('master');
+    return view('about');
 });
 
 Route::resource('/data-kriteria', KriteriaController::class);
