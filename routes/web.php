@@ -28,3 +28,4 @@ Route::resource('/data-alternatif', AlternatifController::class);
 Route::resource('/decision-matrix', DecisionMatrixController::class);
 Route::get('/normalisasi', [NormalisasiController::class, 'index'])->name('normalisasi.index');
 Route::get('/score', [ResultController::class, 'index'])->name('score.index');
+Route::view('/about', 'about');
