@@ -77,11 +77,9 @@
                             </div>
 
                             <div class="mt-10">
-                                <a href="#" class="px-6 py-3 bg-purple-500 text-white rounded-md hover:bg-blue-600 transition-all duration-300">Masuk</a>
+                                <a href="{{ route('data-kriteria.index') }}" class="px-6 py-3 bg-purple-500 text-white rounded-md hover:bg-blue-600 transition-all duration-300">Masuk</a>
                             </div>
                 </div>
-
-
         </div>
     </body>
 </html>
